@@ -1,0 +1,16 @@
+<RCC>
+  <qresource>
+    <file>images/hifive-01-01.png</file>
+    <file>images/robotai2-01.png</file>
+    <file>images/sidebar-02.png</file>
+    <file>images/log_out_white.png</file>
+    <file>images/robot-01.png</file>
+    <file>images/humand1-01.png</file>
+    <file>images/humand2.png</file>
+    <file>images/search-1-01.png</file>
+    <file>images/search2.png</file>
+    <file>images/stitch1-01.png</file>
+    <file>images/stitch2.png</file>
+  </qresource>
+  <qresource/>
+</RCC>
