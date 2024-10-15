@@ -2,7 +2,10 @@ from imageType import ImageType
 import numpy as np
 import cv2
 from PyQt5.QtGui import QImage
+# from customize_yolo import custom_YOLO
 from ultralytics import YOLO
+import matplotlib.pyplot as plt
+
 
 class ImageProcessor():
     def __init__(self):
@@ -13,6 +16,7 @@ class ImageProcessor():
         self.canny_image = None
         self.dog_image = None
         self.human_detect_image = None
+
 
     def loadImage(self, fname):
         image = cv2.imread(fname)
@@ -120,6 +124,7 @@ class ImageProcessor():
             morph_shape = cv2.MORPH_ELLIPSE
         elif shape == "MORPH_CROSS":
             morph_shape = cv2.MORPH_CROSS
+        # Create 
         mph_mask = cv2.getStructuringElement(morph_shape, (size, size))
         if operation_type == "Closing":
             self.temp_d = cv2.morphologyEx(self.dog_image, cv2.MORPH_CLOSE, mph_mask)
@@ -129,6 +134,70 @@ class ImageProcessor():
         self.temp_d = cv2.cvtColor(self.temp_d, cv2.COLOR_GRAY2RGB)
 
         return size, shape
+    
+
+    def detect_humans(self):
+        # تحميل النموذج
+        model = YOLO('yolo11n.pt')
+        image = self.panorama
+        # إجراء الكشف
+        # results = model(image)
+        results = model.predict(source=image, show=False, conf=0.2, device='cpu')
+
+        # تصفية الكائنات لتشمل البشر فقط (الفئة 0 في COCO dataset)
+        # human_detections = [d for d in detections if int(d) == 0]
+        h_count = 0
+        for result in results:
+            for box in result.boxes:
+                # الحصول على إحداثيات الصندوق
+                x1, y1, x2, y2 = box.xyxy[0]  # إحداثيات الصندوق
+                conf = box.conf[0]  # الثقة
+                cls = int(box.cls[0])  # فئة الكائن
+
+                if cls == 0 and conf > 0.2:  # فئة 0 هي "شخص"
+                    h_count += 1
+                    # رسم الصندوق
+                    cv2.rectangle(image, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2)
+                    cv2.putText(image, f'Person {conf:.2f}', (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+
+        # عرض الصورة
+        cv2.imshow('Image', image)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+        self.human_detect_image = image
+
+        if h_count:
+            if h_count == 1:
+                return "👥 Great news! I found 1 person in your picture! 🎉"
+            else:
+                return f"👥 Great news! I found {h_count} people in your picture! 🎉"
+        return "Oops! It looks like we couldn’t find anyone in your picture.☹️ \nBut don’t worry—feel free to go back and choose a few more fabulous photos!🌟"
+        
+        # # تصفية النتائج
+        # filtered_boxes = []
+        # for result in results:
+        #     boxes = result.boxes
+        #     for box in boxes:
+        #         confidence = box.conf[0]  # الثقة
+        #         if confidence > 0.5 and box.cls[0] == 0:  # 0 هو ID الشخص في COCO
+        #             x1, y1, x2, y2 = box.xyxy[0]
+        #             filtered_boxes.append((x1, y1, x2, y2, confidence))
+
+        # # رسم النتائج على الصورة
+        # for (x1, y1, x2, y2, confidence) in filtered_boxes:
+        #     cv2.rectangle(image, (int(x1), int(y1)), (int(x2), int(y2)), (255, 0, 0), 2)
+        #     cv2.putText(image, f'Person: {confidence:.2f}', (int(x1), int(y1) - 10), 
+        #                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 2)
+        
+        # cv2.imshow('Detected Persons', image)
+        # cv2.resizeWindow('Detected Persons', 1000, 1000) 
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
+
+
+
+
+
         
 
         

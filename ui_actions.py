@@ -2,6 +2,7 @@ from WindowUI import Ui_MainWindow
 from imageProcessor import ImageProcessor
 from warningDialog import WarningDialog
 from imageType import ImageType
+from live_previews import live
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QFileDialog, QLabel
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
@@ -13,7 +14,8 @@ class UIActionManager(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.setWindowTitle("AI-Enhanced  Image Stitching and Edge Detection")
         self.image_processor = ImageProcessor()
-        self.valid_images = False 
+        self.valid_images = True # False 
+        self.live_preview = live()
 
         """
         1- why this structure? >>>>>>>>>>
@@ -65,8 +67,43 @@ class UIActionManager(QMainWindow, Ui_MainWindow):
         self.kernel_shape_combo.currentIndexChanged.connect(self.handle_DoG)
         self.open_close_combo.currentIndexChanged.connect(self.handle_DoG)
 
+        # region live preview buttons actions
+        self.live_canny.clicked.connect(self.run_canny_live)
+        self.live_dog.clicked.connect(self.run_DoG_live)
+        self.live_human_dtect.clicked.connect(self.run_YOLO_live)
 
+        # endregion 
+
+    def live_buttons_state(self, state):
+        self.live_canny.setEnabled(state)
+        self.live_dog.setEnabled(state)
+        self.live_human_dtect.setEnabled(state)
+
+
+
+    def run_canny_live(self):
+        print("clicked")
+        self.live_buttons_state(False)
+        apply = lambda: self.live_preview.canny()
+        apply()
+        self.live_buttons_state(True)
     
+    def run_DoG_live(self):
+        print("clicked")
+        self.live_buttons_state(False)
+        apply = lambda: self.live_preview.DoG()
+        apply()
+        self.live_buttons_state(True)
+
+    def run_YOLO_live(self):
+        print("clicked")
+        self.live_buttons_state(False)
+        apply = lambda: self.live_preview.detect_humans()
+        apply()
+        self.live_buttons_state(True)
+    
+        
+
     # region switch Pages functions
 
     def switch_pages_warning(self):
@@ -90,12 +127,13 @@ class UIActionManager(QMainWindow, Ui_MainWindow):
             self.stackedWidget.setCurrentIndex(2)
         else:
             self.switch_pages_warning()
+    
     # endregion 
-
+    # region regarad to images
     def show_img(self, s_lable, image_type ):
         # Get processed image and show it in suitable way
         img = self.image_processor.getImage(image_type)
-        scaled_pixmap = QPixmap.fromImage(img).scaled(self.stackedWidget.size().width(), 300, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        scaled_pixmap = QPixmap.fromImage(img).scaled(self.stackedWidget.size().width(), 500, Qt.KeepAspectRatio, Qt.SmoothTransformation)
         s_lable.setPixmap(scaled_pixmap)
         s_lable.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
     
@@ -129,7 +167,8 @@ class UIActionManager(QMainWindow, Ui_MainWindow):
 
                 # Add QLabel to the layout
                 self.org_imgs_layout.addWidget(label)
-    
+    # endregion
+    # >>>>>>>> need to divide the processes
     def handle_stitch(self):
 
         # Hide instruction labels & previos results
@@ -169,9 +208,9 @@ class UIActionManager(QMainWindow, Ui_MainWindow):
             self.image_processor.apply_DoG()
             self.handle_DoG()
             self.show_both()
+            self.show_humen()
 
-        
-    
+    # region EdgeDetection
     def handle_canny(self, threshold = None):
         lower,threshold_values = self.image_processor.apply_canny(threshold)
         # show threshold values
@@ -198,6 +237,13 @@ class UIActionManager(QMainWindow, Ui_MainWindow):
         self.show_img(self.panorama_result,ImageType.PANORAMA)
         self.show_img(self.canny_result_2,ImageType.CANNY_RESULT)
         self.show_img(self.dog_result_2,ImageType.TEMP_D)
+    # endregion
+    
+    def show_humen(self):
+        self.human_detec_result.setText("Loading... ⌛")
+        comment = self.image_processor.detect_humans()
+        self.show_img(self.human_detec_result,ImageType.HUMAN_DETECTION)
+        self.human_comment.setText(comment)
 
 
 
