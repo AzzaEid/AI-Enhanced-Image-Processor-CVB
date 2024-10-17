@@ -18,6 +18,20 @@ An advanced image processing application that combines panoramic image stitching
 - **Interactive UI**: Built with Qt Designer for a user-friendly experience
 - **Real-time Parameter Adjustment**: Dynamic control over edge detection parameters
 
+## 📸 Screenshots 
+| Page 1 | Page 2 Tab 1 |
+|--------|---------------|
+| ![Page 1](assets/Results/page1.png) | ![Page 2 Tap 1](assets/Results/pag2tab1.png) |
+
+| Page 2 Tab 2 | Page 2 Tab 3 |
+|---------------|---------------|
+| ![Page 2 Tap 2](assets/Results/page2tab2.png) | ![Page 2 Tap 3](assets/Results/page2tab3.png) |
+
+| Page 3 |
+|--------|
+| ![Page 3](assets/Results/page3.png) |
+
+
 ## 🚀 Installation
 
 ### Prerequisites
