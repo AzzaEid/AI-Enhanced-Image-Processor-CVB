@@ -1,7 +1,25 @@
 from PyQt5.QtWidgets import QApplication, QDialog, QLabel, QVBoxLayout, QPushButton, QSizePolicy
 from PyQt5.QtCore import QTimer, Qt
 
-class WarningDialog(QDialog):
+class Dialog(QDialog):
+    """
+    A custom dialog for displaying messages to the user.
+
+    This class inherits from QDialog and creates a modal dialog that displays
+    a title and a message, along with an 'OK' button to close the dialog. 
+
+    The dialog automatically closes after 20 seconds if the user does not interact
+    with it. The message is displayed in a centered QLabel, and the 'OK' button 
+    is centered and configured to close the dialog when clicked.
+
+    Parameters:
+        title (str): The title of the dialog window.
+        message (str): The message to be displayed in the dialog.
+
+    Attributes:
+        timer (QTimer): A timer that triggers the dialog to close automatically
+                         after a specified duration.
+    """
     def __init__(self, title, message):
         super().__init__()
         self.setWindowTitle(title)
@@ -15,7 +33,7 @@ class WarningDialog(QDialog):
         ok_button.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         ok_button.clicked.connect(self.accept)  # Connect the button to close the dialog
         layout.addWidget(ok_button)
-        layout.addWidget(ok_button, alignment=Qt.AlignCenter)  # Center the button
+        layout.setAlignment(ok_button, Qt.AlignCenter)  # Center the button
         
         self.setLayout(layout)
 

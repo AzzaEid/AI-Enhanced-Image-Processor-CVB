@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'assets/design.ui'
+# Form implementation generated from reading ui file 'assets/ui_design.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.11
 #
@@ -173,6 +173,8 @@ class Ui_MainWindow(object):
         self.part4_1 = QtWidgets.QWidget(self.stitch_page)
         self.part4_1.setObjectName("part4_1")
         self.verticalLayout_13 = QtWidgets.QVBoxLayout(self.part4_1)
+        self.verticalLayout_13.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_13.setSpacing(2)
         self.verticalLayout_13.setObjectName("verticalLayout_13")
         self.comment_stitch = QtWidgets.QLabel(self.part4_1)
         self.comment_stitch.setMaximumSize(QtCore.QSize(16777215, 50))
@@ -191,7 +193,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4.addItem(spacerItem2)
         self.verticalLayout_13.addWidget(self.widget_5)
         self.panorama_show = QtWidgets.QLabel(self.part4_1)
-        self.panorama_show.setMinimumSize(QtCore.QSize(0, 220))
+        self.panorama_show.setMinimumSize(QtCore.QSize(0, 300))
         self.panorama_show.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.panorama_show.setObjectName("panorama_show")
         self.verticalLayout_13.addWidget(self.panorama_show)
@@ -217,6 +219,8 @@ class Ui_MainWindow(object):
         self.part1_1.setMaximumSize(QtCore.QSize(16777215, 130))
         self.part1_1.setObjectName("part1_1")
         self.horizontalLayout_10 = QtWidgets.QHBoxLayout(self.part1_1)
+        self.horizontalLayout_10.setContentsMargins(2, 2, 2, 2)
+        self.horizontalLayout_10.setSpacing(1)
         self.horizontalLayout_10.setObjectName("horizontalLayout_10")
         spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_10.addItem(spacerItem5)
@@ -256,6 +260,7 @@ class Ui_MainWindow(object):
         self.part2_1 = QtWidgets.QWidget(self.stitch_page)
         self.part2_1.setObjectName("part2_1")
         self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.part2_1)
+        self.verticalLayout_6.setContentsMargins(0, 0, 1, 0)
         self.verticalLayout_6.setSpacing(1)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
         self.widget_4 = QtWidgets.QWidget(self.part2_1)
@@ -505,21 +510,37 @@ class Ui_MainWindow(object):
 " font-size: 20px; ")
         self.human_detec_result.setObjectName("human_detec_result")
         self.verticalLayout_15.addWidget(self.human_detec_result)
-        self.widget = QtWidgets.QWidget(self.human)
-        self.widget.setMaximumSize(QtCore.QSize(16777215, 90))
-        self.widget.setObjectName("widget")
-        self.horizontalLayout_14 = QtWidgets.QHBoxLayout(self.widget)
-        self.horizontalLayout_14.setObjectName("horizontalLayout_14")
-        spacerItem16 = QtWidgets.QSpacerItem(376, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_14.addItem(spacerItem16)
-        self.live_human_dtect = QtWidgets.QPushButton(self.widget)
+        self.part_3_human = QtWidgets.QWidget(self.human)
+        self.part_3_human.setMaximumSize(QtCore.QSize(16777215, 90))
+        self.part_3_human.setObjectName("part_3_human")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.part_3_human)
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.label_19 = QtWidgets.QLabel(self.part_3_human)
+        self.label_19.setObjectName("label_19")
+        self.horizontalLayout_3.addWidget(self.label_19)
+        self.conf_slider = QtWidgets.QSlider(self.part_3_human)
+        self.conf_slider.setMinimumSize(QtCore.QSize(170, 0))
+        self.conf_slider.setCursor(QtGui.QCursor(QtCore.Qt.ClosedHandCursor))
+        self.conf_slider.setMinimum(0)
+        self.conf_slider.setMaximum(100)
+        self.conf_slider.setSingleStep(2)
+        self.conf_slider.setOrientation(QtCore.Qt.Horizontal)
+        self.conf_slider.setObjectName("conf_slider")
+        self.horizontalLayout_3.addWidget(self.conf_slider)
+        self.conf_value = QtWidgets.QSpinBox(self.part_3_human)
+        self.conf_value.setMinimum(0)
+        self.conf_value.setMaximum(100)
+        self.conf_value.setSingleStep(2)
+        self.conf_value.setObjectName("conf_value")
+        self.horizontalLayout_3.addWidget(self.conf_value)
+        spacerItem16 = QtWidgets.QSpacerItem(375, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem16)
+        self.live_human_dtect = QtWidgets.QPushButton(self.part_3_human)
         self.live_human_dtect.setMaximumSize(QtCore.QSize(16777215, 50))
         self.live_human_dtect.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.live_human_dtect.setObjectName("live_human_dtect")
-        self.horizontalLayout_14.addWidget(self.live_human_dtect)
-        spacerItem17 = QtWidgets.QSpacerItem(375, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_14.addItem(spacerItem17)
-        self.verticalLayout_15.addWidget(self.widget)
+        self.horizontalLayout_3.addWidget(self.live_human_dtect)
+        self.verticalLayout_15.addWidget(self.part_3_human)
         self.verticalLayout_12.addLayout(self.verticalLayout_15)
         self.stackedWidget.addWidget(self.human)
         self.verticalLayout_5.addWidget(self.stackedWidget)
@@ -587,8 +608,8 @@ class Ui_MainWindow(object):
         self.human_page_btn1.setObjectName("human_page_btn1")
         self.verticalLayout_2.addWidget(self.human_page_btn1)
         self.verticalLayout_3.addLayout(self.verticalLayout_2)
-        spacerItem18 = QtWidgets.QSpacerItem(20, 462, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_3.addItem(spacerItem18)
+        spacerItem17 = QtWidgets.QSpacerItem(20, 462, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_3.addItem(spacerItem17)
         self.quit_btn1 = QtWidgets.QPushButton(self.icons_sidebar)
         self.quit_btn1.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.quit_btn1.setText("")
@@ -611,8 +632,8 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(1)
-        self.part2_2.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(2)
+        self.part2_2.setCurrentIndex(2)
         self.sidebar_btn.toggled['bool'].connect(self.icons_sidebar.setHidden) # type: ignore
         self.sidebar_btn.toggled['bool'].connect(self.text_sidebar.setVisible) # type: ignore
         self.human_page_btn1.toggled['bool'].connect(self.human_page_btn2.setChecked) # type: ignore
@@ -623,10 +644,12 @@ class Ui_MainWindow(object):
         self.human_page_btn2.toggled['bool'].connect(self.human_page_btn1.setChecked) # type: ignore
         self.threshold_slider.valueChanged['int'].connect(self.threshold_value.setValue) # type: ignore
         self.threshold_value.valueChanged['int'].connect(self.threshold_slider.setValue) # type: ignore
-        self.kernel_slider.valueChanged['int'].connect(self.kernel_size_value.setValue) # type: ignore
-        self.kernel_size_value.valueChanged['int'].connect(self.kernel_slider.setValue) # type: ignore
         self.quit_btn2.toggled['bool'].connect(MainWindow.close) # type: ignore
         self.quit_btn1.toggled['bool'].connect(MainWindow.close) # type: ignore
+        self.kernel_slider.valueChanged['int'].connect(self.kernel_size_value.setValue) # type: ignore
+        self.kernel_size_value.valueChanged['int'].connect(self.kernel_slider.setValue) # type: ignore
+        self.conf_slider.valueChanged['int'].connect(self.conf_value.setValue) # type: ignore
+        self.conf_value.valueChanged['int'].connect(self.conf_slider.setValue) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -681,5 +704,16 @@ class Ui_MainWindow(object):
 "Let’s see if there are any humans in the panorama we’ve created"))
         self.human_comment.setText(_translate("MainWindow", "comment"))
         self.human_detec_result.setText(_translate("MainWindow", "Result of human detection"))
+        self.label_19.setText(_translate("MainWindow", "Try different value of confidence"))
         self.live_human_dtect.setText(_translate("MainWindow", "Live preview!"))
-import resources_rc
+from Views.resources_rc import *
+
+
+# if __name__ == "__main__":
+#     import sys
+#     app = QtWidgets.QApplication(sys.argv)
+#     MainWindow = QtWidgets.QMainWindow()
+#     ui = Ui_MainWindow()
+#     ui.setupUi(MainWindow)
+#     MainWindow.show()
+#     sys.exit(app.exec_())

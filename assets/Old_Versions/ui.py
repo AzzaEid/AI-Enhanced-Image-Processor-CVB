@@ -627,7 +627,7 @@ class Ui_MainWindow(object):
 "We’ve reached the final step where we witness the magic of artificial intelligence! \n"
 "Let’s see if there are any humans in the panorama we’ve created"))
         self.human_detec_result.setText(_translate(F"MainWindow", "TResult of human detection"))
-import resources_rc
+import Views.resources_rc as resources_rc
 
 # if __name__ == "__main__":
 #     import sys

@@ -3,8 +3,7 @@
 __pycache__/
 *.pyc
 
-*.png
-*.jpg
-*.mp4
-*.log
-*.csv
+assets/images
+assets/Old_Versions
+
+
